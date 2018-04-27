@@ -8,7 +8,7 @@ from sklearn.svm import LinearSVC
 input_file = 'income.txt'
 
 # Read the data
-X = []
+x = []
 y = []
 count_class1 = 0
 count_class2 = 0
@@ -25,43 +25,43 @@ with open(input_file, 'r') as f:
         data = line[:-1].split(', ')
 
         if data[-1] == '<=50K' and count_class1 < max_datapoints:
-            X.append(data)
+            x.append(data)
             count_class1 += 1
 
         if data[-1] == '>50K' and count_class2 < max_datapoints:
-            X.append(data)
+            x.append(data)
             count_class2 += 1
 
 # Convert to numpy array
-X = np.array(X)
+x = np.array(x)
 
 # Convert string data to numerical data
 label_encoder = []
-X_encoded = np.empty(X.shape)
-for i, item in enumerate(X[0]):
+x_encoded = np.empty(x.shape)
+for i, item in enumerate(x[0]):
     if item.isdigit():
-        X_encoded[:, i] = X[:, i]
+        x_encoded[:, i] = x[:, i]
     else:
         label_encoder.append(preprocessing.LabelEncoder())
-        X_encoded[:, i] = label_encoder[-1].fit_transform(X[:, i])
+        x_encoded[:, i] = label_encoder[-1].fit_transform(x[:, i])
 
-X = X_encoded[:, :-1].astype(int)
-y = X_encoded[:, -1].astype(int)
+x = x_encoded[:, :-1].astype(int)
+y = x_encoded[:, -1].astype(int)
 
 # Create SVM classifier
 classifier = OneVsOneClassifier(LinearSVC(random_state=0))
 
 # Train the classifier
-classifier.fit(X, y)
+classifier.fit(x, y)
 
 # Cross validation
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=5)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=5)
 classifier = OneVsOneClassifier(LinearSVC(random_state=0))
-classifier.fit(X_train, y_train)
-y_test_pred = classifier.predict(X_test)
+classifier.fit(x_train, y_train)
+y_test_pred = classifier.predict(x_test)
 
 # Compute the F1 score of the SVM classifier
-f1 = cross_val_score(classifier, X, y, scoring='f1_weighted', cv=3)
+f1 = cross_val_score(classifier, x, y, scoring='f1_weighted', cv=3)
 print("F1 score: " + str(round(100 * f1.mean(), 2)) + "%")
 
 # Predict output for a test datapoint
