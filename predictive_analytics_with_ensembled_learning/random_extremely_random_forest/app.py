@@ -21,7 +21,7 @@ if __name__ == '__main__':
     # args = build_arg_parser().parse_args()
     # classifier_type = args.classifier_type
     # choose erf or rf
-    classifier_type = 'erf'
+    classifier_type = 'rf'
     # Load input data
     input_file = 'data_random_forests.txt'
     data = np.loadtxt(input_file, delimiter=',')
@@ -66,3 +66,16 @@ if __name__ == '__main__':
     print("\nClassifier performance on test dataset\n")
     print(classification_report(y_test, y_test_pred, target_names=class_names))
     print("#" * 40 + "\n")
+
+    # Compute confidence
+    test_datapoints = np.array([[5, 5], [3, 6], [6, 4], [7, 2], [4, 4], [5, 2]])
+
+    print("\nConfidence measure:")
+    for datapoint in test_datapoints:
+        probabilities = classifier.predict_proba([datapoint])[0]
+    predicted_class = 'Class-' + str(np.argmax(probabilities))
+    print('\nDatapoint:', datapoint)
+    print('Predicted class:', predicted_class)
+    # Visualize the datapoints
+    visualize_classifier(classifier, test_datapoints, [0] * len(test_datapoints), 'Test datapoints')
+    plt.show()
