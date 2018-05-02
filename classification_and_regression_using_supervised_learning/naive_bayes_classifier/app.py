@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split, cross_val_score
-from naive_bayes_classifier.utilities import visualize_classifier
+from classification_and_regression_using_supervised_learning.naive_bayes_classifier.utilities import visualize_classifier
 
 # Input file containing data
 input_file = 'data_multi_var.txt'
