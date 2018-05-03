@@ -27,8 +27,10 @@ for metric in metrics:
     classifier = GridSearchCV(ExtraTreesClassifier(random_state=0), parameter_grid, cv=5, scoring=metric)
     classifier.fit(x_train, y_train)
     print("\nGrid scores for the parameter grid:")
-    for params, avg_score, _ in classifier.grid_scores_:
-        print(params, '-->', round(avg_score, 3))
+    p = classifier.cv_results_.get('params')
+    m = classifier.cv_results_.get('mean_test_score')
+    for i in range(len(p)):
+        print(p[i], '-->', round(m[i], 3))
     print("\nBest parameters:", classifier.best_params_)
     y_pred = classifier.predict(x_test)
     print("\nPerformance report:\n")
