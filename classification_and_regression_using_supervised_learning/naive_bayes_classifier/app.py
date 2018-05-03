@@ -11,7 +11,7 @@ input_file = 'data_multi_var.txt'
 data = np.loadtxt(input_file, delimiter=',')
 x, y = data[:, :-1], data[:, -1]
 
-# Create Naïve Bayes classifier
+# Create Naive Bayes classifier
 classifier = GaussianNB()
 
 # Train the classifier
@@ -22,7 +22,7 @@ y_pred = classifier.predict(x)
 
 # Compute accuracy
 accuracy = 100.0 * (y == y_pred).sum() / x.shape[0]
-print("Accuracy of Naïve Bayes classifier =", round(accuracy, 2), "%")
+print("Accuracy of Naive Bayes classifier =", round(accuracy, 2), "%")
 # Visualize the performance of the classifier
 visualize_classifier(classifier, x, y)
 
