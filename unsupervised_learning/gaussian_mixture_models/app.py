@@ -3,20 +3,21 @@ import matplotlib.pyplot as plt
 from matplotlib import patches
 from sklearn import datasets
 from sklearn.mixture import GMM
-# TODO: This needs to be updated
-from sklearn.cross_validation import StratifiedKFold
+from sklearn.model_selection import StratifiedKFold
 
 # Load the iris dataset
 iris = datasets.load_iris()
 
 # Split dataset into training and testing (80/20 split)
-print(iris.target)
-indices = StratifiedKFold(iris.target, n_folds=5)
+indices = StratifiedKFold(n_splits=5)
 # Take the first fold
-train_index, test_index = next(iter(indices))
+y = np.array(iris.target)
+x = y.reshape(len(y), 1)
+train_index, test_index = next(iter(indices.split(x, y)))
 # Extract training data and labels
 x_train = iris.data[train_index]
 y_train = iris.target[train_index]
+
 # Extract testing data and labels
 x_test = iris.data[test_index]
 y_test = iris.target[test_index]
@@ -35,6 +36,7 @@ plt.figure()
 colors = 'bgr'
 for i, color in enumerate(colors):
     # Extract eigenvalues and eigenvectors
+    # noinspection PyProtectedMember
     eigenvalues, eigenvectors = np.linalg.eigh(classifier._get_covars()[i][:2, :2])
     # Normalize the first eigenvector
     norm_vec = eigenvectors[0] / np.linalg.norm(eigenvectors[0])
