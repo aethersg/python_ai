@@ -73,9 +73,9 @@ if __name__ == '__main__':
     print("\nConfidence measure:")
     for datapoint in test_datapoints:
         probabilities = classifier.predict_proba([datapoint])[0]
-    predicted_class = 'Class-' + str(np.argmax(probabilities))
-    print('\nDatapoint:', datapoint)
-    print('Predicted class:', predicted_class)
+        predicted_class = 'Class-' + str(np.argmax(probabilities))
+        print('\nDatapoint:', datapoint)
+        print('Predicted class:', predicted_class)
     # Visualize the datapoints
     visualize_classifier(classifier, test_datapoints, [0] * len(test_datapoints), 'Test datapoints')
     plt.show()

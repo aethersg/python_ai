@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def visualize_classifier(classifier, x, y , title=''):
+def visualize_classifier(classifier, x, y, title=''):
     # Define the minimum and maximum values for X and Y
     # that will be used in the mesh grid
     min_x, max_x = x[:, 0].min() - 1.0, x[:, 0].max() + 1.0
