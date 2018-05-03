@@ -1,7 +1,6 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 from sklearn.cluster import KMeans
-from sklearn import metrics
 
 # Load input data
 X = np.loadtxt('data_clustering.txt', delimiter=',')
@@ -41,7 +40,7 @@ output = output.reshape(x_vals.shape)
 plt.figure()
 plt.clf()
 plt.imshow(output, interpolation='nearest', extent=(x_vals.min(), x_vals.max(), y_vals.min(), y_vals.max()),
-           cmap=plt.cm.Paired, aspect='auto', origin='lower')
+           cmap=plt.get_cmap('Paired'), aspect='auto', origin='lower')
 
 # Overlay input points
 plt.scatter(X[:, 0], X[:, 1], marker='o', facecolors='none', edgecolors='black', s=80)

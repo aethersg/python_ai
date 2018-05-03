@@ -1,4 +1,3 @@
-import argparse
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier
