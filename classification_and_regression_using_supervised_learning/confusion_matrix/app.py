@@ -11,7 +11,7 @@ pred_labels = [2, 1, 0, 2, 4, 3, 1, 0, 1, 3, 3]
 confusion_mat = confusion_matrix(true_labels, pred_labels)
 
 # Visualize confusion matrix
-plt.imshow(confusion_mat, interpolation='nearest', cmap=plt.cm.gray)
+plt.imshow(confusion_mat, interpolation='nearest', cmap=plt.get_cmap('Purples'))
 plt.title('Confusion matrix')
 plt.colorbar()
 ticks = np.arange(5)
