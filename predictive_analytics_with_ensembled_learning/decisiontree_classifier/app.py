@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
-from predictive_analytics_with_ensembled_learning.decisiontree_classifier.utilities import visualize_classifier
+from utilities import visualize_classifier
 
 # Load input data
 input_file = 'data_decision_trees.txt'
